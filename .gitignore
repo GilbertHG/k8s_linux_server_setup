@@ -1,1 +1,3 @@
-./validate_network.sh
+# SSH public key (used in Dockerfile; keep local only)
+id_ed25519.pub
+id_rsa.pub
