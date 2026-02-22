@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  k8s-master:
+    build: .
+    container_name: k8s-master
+    hostname: k8s-master
+    privileged: true
+    stdin_open: true
+    tty: true
+    ports:
+      - "2222:22"
+    networks:
+      k8s-net:
+        ipv4_address: 172.20.0.10
+
+  k8s-worker1:
+    build: .
+    container_name: k8s-worker1
+    hostname: k8s-worker1
+    privileged: true
+    stdin_open: true
+    tty: true
+    ports:
+      - "2223:22"
+    networks:
+      k8s-net:
+        ipv4_address: 172.20.0.11
+
+  k8s-worker2:
+    build: .
+    container_name: k8s-worker2
+    hostname: k8s-worker2
+    privileged: true
+    stdin_open: true
+    tty: true
+    ports:
+      - "2224:22"
+    networks:
+      k8s-net:
+        ipv4_address: 172.20.0.12
+
+networks:
+  k8s-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
+          gateway: 172.20.0.1
